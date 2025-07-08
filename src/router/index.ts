@@ -29,6 +29,7 @@ export const routers: RouteRecordRaw[] = [
         path: '',
         component: HomePage,
         meta: {
+          icon: 'fa-solid fa-house',
           requiresAuth: true,
           name: 'Home',
         },
@@ -49,6 +50,7 @@ export const routers: RouteRecordRaw[] = [
         meta: {
           requiresAuth: true,
           permissions: ['admin'],
+          icon: 'fa-solid fa-user',
           name: 'Users',
         },
       },
@@ -66,6 +68,7 @@ export const routers: RouteRecordRaw[] = [
         component: TaskPage,
         meta: {
           requiresAuth: true,
+          icon: 'fa-solid fa-tasks',
           name: 'Tasks',
         },
       },
@@ -83,6 +86,7 @@ export const routers: RouteRecordRaw[] = [
         component: WorkLogPage,
         meta: {
           requiresAuth: true,
+          icon: 'fa-solid fa-clock',
           name: 'Work Logs',
         },
       },
@@ -101,6 +105,7 @@ export const routers: RouteRecordRaw[] = [
         component: ReportPage,
         meta: {
           requiresAuth: true,
+          icon: 'fa-solid fa-chart-line',
           name: 'Reports',
           permissions: ['director'],
         },
@@ -119,6 +124,7 @@ export const routers: RouteRecordRaw[] = [
         component: StandardPage,
         meta: {
           requiresAuth: true,
+          icon: 'fa-solid fa-book',
           name: 'Standards',
         },
       },

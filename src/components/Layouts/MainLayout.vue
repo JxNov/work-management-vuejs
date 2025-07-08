@@ -63,8 +63,14 @@ const filteredRouters = computed(() => {
               :key="child.path"
               :to="combinePaths(router.path, child.path)"
               class="text-decoration-none text-capitalize py-2 d-block"
+              :class="{
+                'd-flex flex-row align-items-center gap-2': child.meta?.icon,
+              }"
             >
-              {{ child.meta?.name }}
+              <i :class="child.meta?.icon" style="width: 16px" v-if="child.meta?.icon" />
+              <span>
+                {{ child.meta?.name }}
+              </span>
             </RouterLink>
           </template>
 
