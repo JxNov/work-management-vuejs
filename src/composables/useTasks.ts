@@ -35,9 +35,43 @@ export const useTasks = () => {
     }
   };
 
+  const updateTask = async (id: number, task: TTasks) => {
+    try {
+      const { data } = await TaskServices.updateTask(id, { params: task });
+
+      if (!data.success) {
+        throw new Error(data.message || 'Cập nhật công việc thất bại');
+      }
+
+      const index = tasks.value.findIndex(t => t.id === id);
+      if (index !== -1) {
+        tasks.value[index] = data.data;
+      }
+      toast.success('Cập nhật công việc thành công');
+    } catch {
+      toast.error('Cập nhật công việc thất bại');
+    }
+  };
+
+  const deleteTask = async (id: number) => {
+    try {
+      const { data } = await TaskServices.deleteTask(id);
+      if (!data.success) {
+        throw new Error(data.message || 'Xoá công việc thất bại');
+      }
+
+      tasks.value = tasks.value.filter(task => task.id !== id);
+      toast.success('Xoá công việc thành công');
+    } catch {
+      toast.error('Xoá công việc thất bại');
+    }
+  };
+
   return {
     tasks,
     getAllTasks,
     createTask,
+    updateTask,
+    deleteTask,
   };
 };

@@ -2,7 +2,9 @@
 import { onMounted, ref } from 'vue';
 import { useReports } from '@/composables/useReports';
 import { CDatePicker } from '@coreui/vue-pro';
+import { useUsers } from '@/composables/useUsers';
 
+const { users, getAllUsers } = useUsers();
 const { reports, getDailySummary } = useReports();
 
 const formatDate = (date: Date): string => {
@@ -15,14 +17,16 @@ const formatDate = (date: Date): string => {
 onMounted(async () => {
   const today = new Date();
   const formattedDate = formatDate(today);
-  await getDailySummary(formattedDate);
+  await getDailySummary(formattedDate, usernameFilter.value);
+  await getAllUsers();
 });
 
 const dateFilter = ref(new Date());
+const usernameFilter = ref('');
 
 const changeDate = async () => {
   const formattedDate = formatDate(dateFilter.value);
-  await getDailySummary(formattedDate);
+  await getDailySummary(formattedDate, usernameFilter.value);
 };
 </script>
 
@@ -31,7 +35,16 @@ const changeDate = async () => {
     <div class="mb-4 d-flex justify-content-between align-items-center">
       <h1>Reports Page</h1>
 
-      <CDatePicker locale="en-US" v-model:date="dateFilter" @update:date="changeDate" />
+      <div class="d-flex align-items-center gap-3">
+        <select class="form-select" v-model="usernameFilter" @change="changeDate">
+          <option value="" selected>All Users</option>
+          <option v-for="user in users" :key="user.id" :value="user.username">
+            {{ user.username }}
+          </option>
+        </select>
+
+        <CDatePicker locale="en-US" v-model:date="dateFilter" @update:date="changeDate" />
+      </div>
     </div>
 
     <table class="table table-striped">
@@ -39,7 +52,7 @@ const changeDate = async () => {
         <tr>
           <th>#</th>
           <th>Username</th>
-          <th>total</th>
+          <th>Total</th>
         </tr>
       </thead>
 

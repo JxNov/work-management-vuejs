@@ -1,12 +1,14 @@
-import type { TTasks } from '@/types/task.type';
-
 export type TWorkLogs = {
-  date: string;
-  quantity: number;
-  users: {
-    username: string;
-  };
-  tasks: TTasks;
+  username: string;
+  total: number;
+  logs: {
+    id: number;
+    date: string;
+    taskId: number;
+    task: string;
+    quantity: number;
+    isEnough: boolean;
+  }[];
 };
 
 export type TWorkLogRequest = {

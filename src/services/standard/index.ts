@@ -10,6 +10,10 @@ const StandardServices = {
   setStandard(options?: ValueOptions) {
     return apiServices.post(STANDARD_API.SET_STANDARD, options?.params);
   },
+
+  deleteStandard(id: number, options?: ValueOptions) {
+    return apiServices.delete(STANDARD_API.DELETE_STANDARD(id), options?.params);
+  },
 };
 
 export default StandardServices;

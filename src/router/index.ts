@@ -15,6 +15,7 @@ import TaskPage from '@/views/TaskPage.vue';
 import WorkLogPage from '@/views/WorkLogPage.vue';
 import ReportPage from '@/views/ReportPage.vue';
 import StandardPage from '@/views/StandardPage.vue';
+import UserPage from '@/views/UserPage.vue';
 
 export const routers: RouteRecordRaw[] = [
   {
@@ -30,6 +31,25 @@ export const routers: RouteRecordRaw[] = [
         meta: {
           requiresAuth: true,
           name: 'Home',
+        },
+      },
+    ],
+  },
+  {
+    path: '/users',
+    component: MainLayout,
+    meta: {
+      requiresAuth: true,
+      permissions: ['admin'],
+    },
+    children: [
+      {
+        path: '',
+        component: UserPage,
+        meta: {
+          requiresAuth: true,
+          permissions: ['admin'],
+          name: 'Users',
         },
       },
     ],
@@ -73,7 +93,7 @@ export const routers: RouteRecordRaw[] = [
     component: MainLayout,
     meta: {
       requiresAuth: true,
-      permissions: ['admin', 'director'],
+      permissions: ['director'],
     },
     children: [
       {
@@ -82,7 +102,7 @@ export const routers: RouteRecordRaw[] = [
         meta: {
           requiresAuth: true,
           name: 'Reports',
-          permissions: ['admin', 'director'],
+          permissions: ['director'],
         },
       },
     ],

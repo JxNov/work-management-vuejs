@@ -10,6 +10,10 @@ const WorkLogServices = {
   createOrUpdateWorkLog(options?: ValueOptions) {
     return apiServices.post(WORK_LOG_API.CREATE_OR_UPDATE, options?.params);
   },
+
+  deleteWorkLog(id: number, options?: ValueOptions) {
+    return apiServices.delete(WORK_LOG_API.DELETE(id), options?.params);
+  },
 };
 
 export default WorkLogServices;

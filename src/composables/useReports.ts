@@ -5,10 +5,10 @@ import ReportServices from '@/services/report';
 export const useReports = () => {
   const reports = ref<TReports[]>([]);
 
-  const getDailySummary = async (date: string) => {
+  const getDailySummary = async (date: string, username: string) => {
     try {
       const { data } = await ReportServices.getDailySummary({
-        params: { date },
+        params: { date, username },
       });
 
       if (!data.success) {

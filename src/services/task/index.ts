@@ -10,6 +10,14 @@ const TaskServices = {
   createTask(options?: ValueOptions) {
     return apiServices.post(TASK_API.CREATE, options?.params);
   },
+
+  updateTask(id: number, options?: ValueOptions) {
+    return apiServices.patch(TASK_API.UPDATE(id), options?.params);
+  },
+
+  deleteTask(id: number, options?: ValueOptions) {
+    return apiServices.delete(TASK_API.DELETE(id), options?.params);
+  },
 };
 
 export default TaskServices;

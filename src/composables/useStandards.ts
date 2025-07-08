@@ -28,10 +28,31 @@ export const useStandards = () => {
         throw new Error(data.message || 'Cập nhật tiêu chuẩn thất bại');
       }
 
-      standards.value.push(data.data);
+      if (standard.id) {
+        const index = standards.value.findIndex(s => s.id === standard.id);
+        if (index !== -1) {
+          standards.value[index] = { ...standards.value[index], ...standard };
+        }
+      } else {
+        standards.value.push(data.data);
+      }
       toast.success('Cập nhật tiêu chuẩn thành công');
     } catch {
       toast.error('Cập nhật tiêu chuẩn thất bại');
+    }
+  };
+
+  const deleteStandard = async (id: number) => {
+    try {
+      const { data } = await StandardServices.deleteStandard(id);
+      if (!data.success) {
+        throw new Error(data.message || 'Xoá tiêu chuẩn thất bại');
+      }
+
+      standards.value = standards.value.filter(standard => standard.id !== id);
+      toast.success('Xoá tiêu chuẩn thành công');
+    } catch {
+      toast.error('Xoá tiêu chuẩn thất bại');
     }
   };
 
@@ -39,5 +60,6 @@ export const useStandards = () => {
     standards,
     getAllStandards,
     setStandard,
+    deleteStandard,
   };
 };

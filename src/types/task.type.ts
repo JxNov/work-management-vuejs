@@ -1,5 +1,5 @@
 export type TTasks = {
-  id?: number,
-  code: string,
-  name: string
+  id: number;
+  code: string;
+  name: string;
 };
